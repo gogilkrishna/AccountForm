@@ -1,0 +1,261 @@
+<div class="accountDetailForm">
+  <div class="form">
+    <form [formGroup]="accountForm">
+      <div class="formHead">
+        <h2>Account Details</h2>
+        <div class="spacer"></div>
+        <mat-checkbox  color="primary"  [checked]="accountForm.invalid"
+         [disabled]="accountForm.invalid"  formControlName="isDefault">
+          Make this Account as default</mat-checkbox>
+          <button style="height:20px; width:20px; border-radius: 50%;background-color:#1D60E3;border:none ;">
+            <span style="height:10px; width:10px;color: white; ">&#43;</span>
+            </button >&nbsp;<span style="color:#1D60E3 ;">Add account</span>
+
+      </div>
+      <div class="formContainer" fxLayout="row" fxLayoutAlign="space-evenly stretch" >
+        <div class="formInput">
+          <mat-form-field appearance="outline" [style.width.px]=800>
+            <mat-label>Account Name</mat-label>
+              <input matInput formControlName="accountName">
+          </mat-form-field>
+          <mat-form-field appearance="outline" [style.width.px]=800>
+            <mat-label>Account Number/IBAN</mat-label>
+              <input matInput formControlName="accountNumber">
+          </mat-form-field><br>
+          <mat-checkbox formControlName = "isAddressHQAddress"
+          color="primary"style="padding-left:3% ;" >
+           Same as Company Registered/ HQ Address </mat-checkbox><br>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>Address Line 1</mat-label>
+              <input matInput formControlName="address1">
+          </mat-form-field>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>Address Line 2</mat-label>
+              <input matInput formControlName="address2">
+          </mat-form-field><br>
+          <mat-form-field appearance="outline"[style.width.px]=327>
+            <mat-label>City</mat-label>
+              <input matInput formControlName="city">
+          </mat-form-field>
+          <mat-form-field appearance="outline"[style.width.px]=327>
+            <mat-label>Postal Code</mat-label>
+              <input matInput formControlName="pin">
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>State</mat-label>
+              <input matInput formControlName="state">
+          </mat-form-field>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>Country</mat-label>
+              <input matInput formControlName="country">
+          </mat-form-field><br>
+          <h2>Payment Currency</h2>
+          <div class="Currency">
+            <mat-radio-group formControlName="currencyOptions">
+              <mat-radio-button color="primary" value="EUR" >EUR</mat-radio-button>
+              <mat-radio-button color="primary" value="USD">USD</mat-radio-button>
+            <mat-radio-button color="primary" value="SGD">SGD</mat-radio-button>
+          </mat-radio-group>
+          </div>
+          <h2>Bank Details</h2>
+          <mat-form-field appearance="outline" [style.width.px]=800>
+            <mat-label>Bank Name</mat-label>
+              <input matInput formControlName="bankName">
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" [style.width.px]=800>
+            <mat-label>Branch Name</mat-label>
+              <input matInput formControlName="branchName">
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>Address Line 1</mat-label>
+              <input matInput formControlName="bankAddressLine1">
+          </mat-form-field>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>Address Line 2</mat-label>
+              <input matInput formControlName="bankAddressLine2">
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>City</mat-label>
+              <input matInput formControlName="bankCity">
+          </mat-form-field>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>Postal Code</mat-label>
+              <input matInput formControlName="bankPin">
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>State</mat-label>
+              <input matInput formControlName="bankState">
+          </mat-form-field>
+          <mat-form-field appearance="outline" [style.width.px]=327>
+            <mat-label>Country</mat-label>
+              <input matInput formControlName="bankCountry">
+          </mat-form-field><br>
+          <mat-form-field appearance="outline" [style.width.px]=800>
+            <mat-label>SWIFT/BIC Code</mat-label>
+              <input matInput formControlName="swiftCode">
+          </mat-form-field>
+        </div>
+
+        <div class="formList">
+          <a *ngFor="let detail of dataSource" (click)="patchData(detail)">
+            <div class ="detailBox">
+              <h3>{{detail.accountName}} <span style="float:right; padding-top: 10px;padding-right: 15px;">
+              <mat-icon *ngIf="detail.isDefault" style="color:#15eb35 ;">check_circle</mat-icon>
+                  </span></h3>
+                   <h4>{{detail.bankName}}</h4>
+                    <h5 style="margin-top:-20px ;">{{detail.bankState}}</h5>
+                    <h4 >{{detail.country}}</h4>
+                    <p style="padding-bottom:30px"><mat-icon> location_on</mat-icon>{{detail.bankCountry}}
+                 <span style="float:right; padding-top: 10px;padding-right: 15px;">{{detail.currencyOptions}}</span> </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </form>
+
+    <div class="submitForm">
+      <div fxLayout="row" fxLayoutAlign="space-between start" >
+        <button mat-raised-button >Cancel</button>
+        <button mat-raised-button color="primary" (click)="submitForm()"[disabled]="accountForm.invalid">
+          Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+        <!-- <form [formGroup]="accountForm">
+  <div>
+    <div style = "display: flex;">
+      <div style="padding-right: 57%;">
+        <h2>Account Details</h2>
+      </div>
+      <div style="padding-right: 20px;">
+        <mat-checkbox  color="primary"  [checked]="accountForm.invalid"
+         [disabled]="accountForm.invalid"  formControlName="isDefault" >
+          Make this Account as default</mat-checkbox>
+      </div>
+      <button style="height:20px; width:20px; border-radius: 50%;background-color:#1D60E3;border:none ;">
+        <span style="height:10px; width:10px;color: white; ">&#43;</span>
+        </button >&nbsp;<span style="color:#1D60E3 ;">Add account</span>
+    </div>
+  </div>
+  <div style="display: flex">
+    <div class="first">
+        <mat-form-field appearance="outline" [style.width.px]=800>
+          <mat-label>Account Name</mat-label>
+            <input matInput formControlName="accountName">
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.width.px]=800>
+          <mat-label>Account Number/IBAN</mat-label>
+            <input matInput formControlName="accountNumber">
+        </mat-form-field><br>
+        <mat-checkbox formControlName = "isAddressHQAddress"
+        color="primary"style="padding-left:3% ;" >
+         Same as Company Registered/ HQ Address </mat-checkbox><br>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>Address Line 1</mat-label>
+            <input matInput formControlName="address1">
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>Address Line 2</mat-label>
+            <input matInput formControlName="address2">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline"[style.width.px]=327>
+          <mat-label>City</mat-label>
+            <input matInput formControlName="city">
+        </mat-form-field>
+        <mat-form-field appearance="outline"[style.width.px]=327>
+          <mat-label>Postal Code</mat-label>
+            <input matInput formControlName="pin">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>State</mat-label>
+            <input matInput formControlName="state">
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>Country</mat-label>
+            <input matInput formControlName="country">
+        </mat-form-field><br>
+        <h2>Payment Currency</h2>
+        <div class="Currency">
+          <mat-radio-group formControlName="currencyOptions">
+            <mat-radio-button color="primary" value="EUR" >EUR</mat-radio-button>
+            <mat-radio-button color="primary" value="USD">USD</mat-radio-button>
+          <mat-radio-button color="primary" value="SGD">SGD</mat-radio-button>
+        </mat-radio-group>
+        </div>
+        <h2>Bank Details</h2>
+        <mat-form-field appearance="outline" [style.width.px]=800>
+          <mat-label>Bank Name</mat-label>
+            <input matInput formControlName="bankName">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" [style.width.px]=800>
+          <mat-label>Branch Name</mat-label>
+            <input matInput formControlName="branchName">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>Address Line 1</mat-label>
+            <input matInput formControlName="bankAddressLine1">
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>Address Line 2</mat-label>
+            <input matInput formControlName="bankAddressLine2">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>City</mat-label>
+            <input matInput formControlName="bankCity">
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>Postal Code</mat-label>
+            <input matInput formControlName="bankPin">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>State</mat-label>
+            <input matInput formControlName="bankState">
+        </mat-form-field>
+        <mat-form-field appearance="outline" [style.width.px]=327>
+          <mat-label>Country</mat-label>
+            <input matInput formControlName="bankCountry">
+        </mat-form-field><br>
+        <mat-form-field appearance="outline" [style.width.px]=800>
+          <mat-label>SWIFT/BIC Code</mat-label>
+            <input matInput formControlName="swiftCode">
+        </mat-form-field>
+    </div>
+
+
+    <div class="sec" >
+      <a *ngFor="let detail of dataSource" (click)="patchData(detail)">
+      <div class ="detailBox" style="margin-bottom:30px;">
+        <mat-icon style="float:right" *ngIf="detail.isDefault">check_circle</mat-icon>
+            <h3>{{detail.accountName}}</h3>
+             <h4>{{detail.bankName}}</h4>
+              <h5 style="margin-top:-20px ;">{{detail.bankState}}</h5>
+              <h4 >{{detail.country}}</h4>
+
+              <p style="padding-bottom:30px"><mat-icon> location_on</mat-icon>{{detail.bankCountry}}
+           <span style="float:right; padding-top: 10px;padding-right: 15px;">{{detail.currencyOptions}}</span> </p>
+      </div>
+    </a>
+    </div>
+  </div>
+  </form> -->
+
+  <!-- <div class="footer">
+  <div style="float: right;">
+    <button mat-raised-button >Cancel</button>&nbsp;
+    <button mat-raised-button color="primary" (click)="submitForm()"[disabled]="accountForm.invalid"
+    >Save</button>
+ </div>
+  </div> -->
+  <!-- <p>Form status: {{ accountForm.value.currencyOptions}}</p>
+<p>Form status: {{ accountForm.value.isAddressHQAddress}}</p> -->
+
+
+
+
+
+
+
